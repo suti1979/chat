@@ -1,0 +1,21 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+$body-bg: $indigo-800;
+$body-color: $indigo-100;
+
+#messages {
+    background-color: $indigo-700;
+   
+}
+
+#newmessage {
+    background-color: $indigo-700;
+}
+
+#message {
+  resize:none;
+}
+
+@import '~bootstrap/scss/bootstrap.scss';
+
