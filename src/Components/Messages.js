@@ -19,15 +19,15 @@ export default function Messages() {
   ]
 
   return (
-    <div className="p-2" id="messages">
+    <>
       {MESSAGES.map((row) => {
         return (
-          <div key={row.id} className="mb-2">
+          <div key={row.id} className="rounded m-2 p-2 message">
             <div>{row.timedate.toISOString()}</div>
             <strong>{row.userName}:</strong> {row.message}
           </div>
         )
       })}
-    </div>
+    </>
   )
 }

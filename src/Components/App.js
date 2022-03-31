@@ -2,15 +2,15 @@ import Messages from "./Messages"
 
 export default function App() {
   return (
-    <div className="App">
+    <div className="App container">
       <main>
         <Messages />
       </main>
 
-      <footer id="newmessage">
+      <footer className="container"> 
         <form>
           <div className="input-group">
-            <textarea className="form-control" id="message-textarea" aria-label="With textarea" />
+            <textarea className="form-control" id="message-textarea" />
             <input className="btn btn-primary" type="submit" value="&#8688;" />
           </div>
 
