@@ -23,16 +23,16 @@ export default function App() {
   function handleMessageAdd(newMessage) {
   
     newMessage = { ...newMessage, id: new Date(), timedate: new Date() }
-    console.log(newMessage)
     setMessages([...messages, newMessage])
-    
   }
 
   return (
-    <MessagesCtx.Provider value={messagesCtxValue}>
-      <Messages messages={messages} />
-      <AddMessage />
-    </MessagesCtx.Provider>
+    <div className="container">
+      <MessagesCtx.Provider value={messagesCtxValue}>
+        <Messages messages={messages} />
+        <AddMessage />
+      </MessagesCtx.Provider>
+    </div>
   )
 }
 

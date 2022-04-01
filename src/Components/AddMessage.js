@@ -16,32 +16,23 @@ export default function AddMessage() {
   }
 
   return (
-    <footer className="container-fluid">
-      <div className="input-group">
-        <textarea
-          value={newMessage.message}
+    <footer>
+   
+        <label htmlFor="message-textarea" className="form-label">
+          {newMessage.userName}
+        </label>
+        <input
+          type="text"
+          value={newMessage.message || ""}
           onChange={(e) => handleChange({ message: e.target.value })}
           name="textmessage"
-          className="form-control"
+          className="form-control m-2"
           id="message-textarea"
-          required
         />
-        <button
-          onClick={() => handleMessageAdd(newMessage)}
-          className="form-control btn btn-primary"
-          value="&#8688;"
-        />
-      </div>
-
-      <div className="input-group input-group-sm mt-1">
-        <input
-        //   value={newMessage.URL}
-        //   onChange={(e) => handleChange({ URL: e.target.value })}
-          className="form-control"
-          type="file"
-          id="formFile"
-        />
-      </div>
+        <button onClick={() => handleMessageAdd(newMessage)} className="btn btn-primary">
+        &#8688;
+      </button>
+  
     </footer>
   )
 }

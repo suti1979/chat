@@ -24,13 +24,13 @@ main {
 footer {
    position: fixed;
    bottom: 0;
-   left:auto;
    height: $footer-height;
    //width: calc(100vw - $footer-height); 
 }
 
 #message-textarea {
   resize: none;
+  
 }
 
 ::-webkit-scrollbar {
