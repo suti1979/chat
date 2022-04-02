@@ -17,15 +17,17 @@ export default function AddMessage() {
 
   function handleMessageAdd(e, newMessage) {
     e.preventDefault()
-    newMessage = { ...newMessage, id: new Date(), timedate: new Date() }
-    handleChange({ message: "" })
-    addMessage(newMessage)
+    if (newMessage.message !== undefined && newMessage.message !== "") {
+      newMessage = { ...newMessage, id: new Date(), timedate: new Date() }
+      handleChange({ message: "" })
+      addMessage(newMessage)
+    }
   }
 
   return (
     <form className="m-2" onSubmit={(e) => handleMessageAdd(e, newMessage)}>
       <div className="input-group">
-        <span class="input-group-text">{newMessage.userName}</span>
+        <span className="input-group-text">{newMessage.userName}</span>
         <input
           type="text"
           value={newMessage.message || ""}

@@ -8,12 +8,9 @@ $theme-colors: (
   "primary" : $indigo-600,
 );
 
-// custom color variables
+// custom variables
 $footer-height: 60px;
 
-.message {
-  background-color: $indigo-600;
-}
 
 // overall appearance
 main {
@@ -23,7 +20,15 @@ main {
 
 #message-textarea {
   resize: none;
-  
+}
+
+span.input-group-text {
+  background-color: $indigo-600;
+  color: $indigo-100;
+}
+
+.message {
+  background-color: $indigo-600;
 }
 
 ::-webkit-scrollbar {
