@@ -9,7 +9,7 @@ $theme-colors: (
 );
 
 // custom color variables
-$footer-height: 110px;
+$footer-height: 60px;
 
 .message {
   background-color: $indigo-600;
@@ -19,13 +19,6 @@ $footer-height: 110px;
 main {
   height: calc(100vh - $footer-height); 
   overflow-y: auto;
-}
-
-footer {
-   position: fixed;
-   bottom: 0;
-   height: $footer-height;
-   //width: calc(100vw - $footer-height); 
 }
 
 #message-textarea {
