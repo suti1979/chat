@@ -6,13 +6,21 @@ export const MessagesCtx = createContext()
 
 export default function App() {
   const [messages, setMessages] = useState([])
-  const messagesCtxValue = {
-    addMessage,
+  const messagesCtxValue = {addMessage}
+
+  const getData = () => {
+    fetch("data.json", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((myJson) => setMessages(myJson))
   }
 
   useEffect(() => {
-    // ...messages
-    setMessages([DUMMY1, DUMMY2])
+    getData()
   }, [])
 
   //  useEffect(() => {
@@ -32,19 +40,4 @@ export default function App() {
       </MessagesCtx.Provider>
     </div>
   )
-}
-
-const DUMMY1 = {
-  id: 1,
-  timedate: new Date(),
-  userName: "Süti",
-  message:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-}
-const DUMMY2 = {
-  id: 2,
-  timedate: new Date(),
-  userName: "Heléna",
-  message:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
 }

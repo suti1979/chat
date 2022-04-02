@@ -16,7 +16,7 @@ export default function Messages({ messages }) {
         {messages.map((row) => {
           return (
             <div key={row.id} className="rounded m-2 p-2 message">
-              <div className="">{row.timedate.toISOString()}</div>
+              <div className="">{row.timedate}</div>
               <strong>{row.userName}:</strong> {row.message}
             </div>
           )

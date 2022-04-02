@@ -1,5 +1,6 @@
 import { useContext, useState, useEffect } from "react"
 import { MessagesCtx } from "./App"
+import { v4 as uuidv4 } from 'uuid';
 
 const DUMMY_USERNAME = "Frici"
 
@@ -18,7 +19,7 @@ export default function AddMessage() {
   function handleMessageAdd(e, newMessage) {
     e.preventDefault()
     if (newMessage.message !== undefined && newMessage.message !== "") {
-      newMessage = { ...newMessage, id: new Date(), timedate: new Date() }
+      newMessage = { ...newMessage, id: uuidv4(), timedate: uuidv4() }
       handleChange({ message: "" })
       addMessage(newMessage)
     }
