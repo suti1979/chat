@@ -4,7 +4,7 @@ import { MessagesCtx } from "./App"
 const DUMMY_USERNAME = "Frici"
 
 export default function AddMessage() {
-  const { handleMessageAdd } = useContext(MessagesCtx)
+  const { addMessage } = useContext(MessagesCtx)
   const [newMessage, setNewMessage] = useState([])
 
   useEffect(() => {
@@ -15,22 +15,28 @@ export default function AddMessage() {
     setNewMessage({ ...newMessage, ...value })
   }
 
+  function handleMessageAdd(e, newMessage) {
+    e.preventDefault()
+    handleChange({ message: "" })
+    newMessage = { ...newMessage, id: new Date(), timedate: new Date() }
+    addMessage(newMessage)
+  }
+
   return (
     <footer>
-      <label htmlFor="message-textarea" className="form-label">
-        {newMessage.userName}
-      </label>
-      <input
-        type="text"
-        value={newMessage.message || ""}
-        onChange={(e) => handleChange({ message: e.target.value })}
-        name="textmessage"
-        className="form-control m-2"
-        id="message-textarea"
-      />
-      <button onClick={() => handleMessageAdd(newMessage)} className="btn btn-primary">
-        &#8688;
-      </button>
+      <form onSubmit={(e) => handleMessageAdd(e, newMessage)}>
+        <label htmlFor="message-textarea" className="form-label">
+          {newMessage.userName}
+        </label>
+        <input
+          type="text"
+          value={newMessage.message || ""}
+          onChange={(e) => handleChange({ message: e.target.value })}
+          name="textmessage"
+          className="form-control m-2"
+          id="message-textarea"
+        />
+      </form>
     </footer>
   )
 }

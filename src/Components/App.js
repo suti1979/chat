@@ -7,7 +7,7 @@ export const MessagesCtx = createContext()
 export default function App() {
   const [messages, setMessages] = useState([])
   const messagesCtxValue = {
-    handleMessageAdd,
+    addMessage,
   }
 
   useEffect(() => {
@@ -20,9 +20,7 @@ export default function App() {
   //    console.log(messages)
   //  }, [messages])
 
-  function handleMessageAdd(newMessage) {
-  
-    newMessage = { ...newMessage, id: new Date(), timedate: new Date() }
+  function addMessage(newMessage) {
     setMessages([...messages, newMessage])
   }
 
