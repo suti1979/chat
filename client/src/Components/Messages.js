@@ -16,7 +16,7 @@ export default function Messages({ messages }) {
         {messages.map((row) => {
           return (
             <div key={row._id} className="rounded m-2 p-2 message">
-              <div className="">{row.timedate}</div>
+              <div className="text-center">{new Date(row.timedate).toLocaleString()}</div>
               <strong>{row.userName}:</strong> {row.message}
             </div>
           )

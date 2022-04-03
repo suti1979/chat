@@ -1,31 +1,28 @@
 import Messages from "./Messages"
 import AddMessage from "./AddMessage"
-import { useState, useEffect, createContext } from "react"
+import { useState, useEffect } from "react"
 import axios from "axios"
-
-export const MessagesCtx = createContext()
 
 export default function App() {
   const [messages, setMessages] = useState([])
-  const messagesCtxValue = { addMessage }
+  const [userName, setUserName] = useState("")
 
   useEffect(() => {
     axios
       .get("/api")
       .then((res) => setMessages(res.data))
       .catch((err) => console.error(err))
-  }, [])
+  }, [messages])
 
-  function addMessage(newMessage) {
-    setMessages([...messages, newMessage])
-  }
+  useEffect(() => {
+    const user = window.prompt("Please enter your name", "Poppy")
+    setUserName(user)
+  },[])
 
   return (
-    <div className="container">
-      <MessagesCtx.Provider value={messagesCtxValue}>
-        <Messages messages={messages} />
-        <AddMessage />
-      </MessagesCtx.Provider>
+    <div className="App container">
+      <Messages messages={messages} />
+      <AddMessage userName={userName} />
     </div>
   )
 }

@@ -1,16 +1,12 @@
-import { useContext, useState, useEffect } from "react"
-import { MessagesCtx } from "./App"
+import { useState, useEffect } from "react"
 import axios from "axios"
 
-const DUMMY_USERNAME = "Frici"
-
-export default function AddMessage() {
-  const { addMessage } = useContext(MessagesCtx)
+export default function AddMessage(props) {
   const [newMessage, setNewMessage] = useState([])
-
+ 
   useEffect(() => {
-    setNewMessage({ userName: `${DUMMY_USERNAME}` })
-  }, [])
+    setNewMessage({ userName: props.userName })
+  }, [props.userName])
 
   function handleChange(value) {
     setNewMessage({ ...newMessage, ...value })
@@ -19,11 +15,9 @@ export default function AddMessage() {
   function handleMessageAdd(e, newMessage) {
     e.preventDefault()
     if (newMessage.message !== undefined && newMessage.message !== "") {
-      axios.post("/api", newMessage)
-        .catch((err) => console.error(err))
-      
+      axios.post("/api", newMessage).catch((err) => console.error(err))
+
       handleChange({ message: "" })
-      addMessage(newMessage)
     }
   }
 
