@@ -15,7 +15,7 @@ export default function Messages({ messages }) {
       <main>
         {messages.map((row) => {
           return (
-            <div key={row.id} className="rounded m-2 p-2 message">
+            <div key={row._id} className="rounded m-2 p-2 message">
               <div className="">{row.timedate}</div>
               <strong>{row.userName}:</strong> {row.message}
             </div>

@@ -1,32 +1,20 @@
 import Messages from "./Messages"
 import AddMessage from "./AddMessage"
 import { useState, useEffect, createContext } from "react"
+import axios from "axios"
 
 export const MessagesCtx = createContext()
 
 export default function App() {
   const [messages, setMessages] = useState([])
-  const messagesCtxValue = {addMessage}
-
-  const getData = () => {
-    fetch("data.json", {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((myJson) => setMessages(myJson))
-  }
+  const messagesCtxValue = { addMessage }
 
   useEffect(() => {
-    getData()
+    axios
+      .get("/api")
+      .then((res) => setMessages(res.data))
+      .catch((err) => console.error(err))
   }, [])
-
-  //  useEffect(() => {
-  //    // ...messages
-  //    console.log(messages)
-  //  }, [messages])
 
   function addMessage(newMessage) {
     setMessages([...messages, newMessage])

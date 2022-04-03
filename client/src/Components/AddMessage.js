@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from "react"
 import { MessagesCtx } from "./App"
-import { v4 as uuidv4 } from 'uuid';
+import axios from "axios"
 
 const DUMMY_USERNAME = "Frici"
 
@@ -19,7 +19,9 @@ export default function AddMessage() {
   function handleMessageAdd(e, newMessage) {
     e.preventDefault()
     if (newMessage.message !== undefined && newMessage.message !== "") {
-      newMessage = { ...newMessage, id: uuidv4(), timedate: uuidv4() }
+      axios.post("/api", newMessage)
+        .catch((err) => console.error(err))
+      
       handleChange({ message: "" })
       addMessage(newMessage)
     }
