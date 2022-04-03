@@ -12,7 +12,7 @@ export default function App() {
       .get("/api")
       .then((res) => setMessages(res.data))
       .catch((err) => console.error(err))
-  }, [messages])
+  }, [])
 
   useEffect(() => {
     const user = window.prompt("Please enter your name", "Poppy")
