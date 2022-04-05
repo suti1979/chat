@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const Chat = require("./../models/chat")
 
+
 router.get("/", async (req, res) => {
   await Chat.find()
     .then((chat) => res.json(chat))

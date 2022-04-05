@@ -1,6 +1,7 @@
 require("dotenv").config()
 const express = require("express")
 const app = express()
+const http = require("http").createServer(app)
 const methodOverride = require("method-override")
 const chatRouter = require("./routes/chatRouter")
 const HOST = "127.0.0.1"
@@ -23,8 +24,23 @@ app.use(express.urlencoded({ extended: false }))
 app.use(methodOverride("_method"))
 app.use(express.json())
 
+const io = require("socket.io")(http, {
+  cors: {
+    origins: ["http://localhost:3001", "http://localhost:4001", "http://localhost:8080"],
+  },
+})
+
+io.on("connection", (socket) => {
+  console.log("a user connected")
+  socket.on("disconnect", () => {
+    console.log("user disconnected")
+  })
+  socket.on("sendMsg", (msg) => {
+    console.log("message: " + msg)
+    io.emit("serverchange", `server: ${msg}`)
+  })
+})
+
 app.use(`${API_URL}/`, chatRouter)
 
-app.listen(PORT, HOST, () =>
-  console.log(`Server started @ http://${HOST}:${PORT}`)
-)
+http.listen(PORT, HOST, () => console.log(`Server started @ http://${HOST}:${PORT}`))

@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
+import { sendMsg } from "../socketio.service"
+import { v4 as uuidv4 } from "uuid"
 
 export default function AddMessage(props) {
   const [newMessage, setNewMessage] = useState([])
- 
+
   useEffect(() => {
     setNewMessage({ userName: props.userName })
   }, [props.userName])
@@ -17,6 +19,7 @@ export default function AddMessage(props) {
     if (newMessage.message !== undefined && newMessage.message !== "") {
       axios.post("/api", newMessage).catch((err) => console.error(err))
 
+      sendMsg(uuidv4())
       handleChange({ message: "" })
     }
   }
