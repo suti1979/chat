@@ -18,7 +18,7 @@ export const sendMsg = (msg) => {
 
 export const waitMsg = () => {
   socket.on("serverchange", msg => {
-    console.log(msg)
+    //console.log(msg)
     return msg
   })
 }

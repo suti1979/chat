@@ -7,20 +7,20 @@ import { initiateSocketConnection, disconnectSocket, socket } from "../socketio.
 export default function App() {
   const [messages, setMessages] = useState([])
   const [userName, setUserName] = useState("x")
-  const [update, setUpdate] = useState(null)
+  const [update, setUpdate] = useState(0)
 
   useEffect(() => {
     initiateSocketConnection()
-    socket.on("serverchange", (msg) => {
-      setUpdate(msg)
-      console.log(update)
-      
-    })
-
     return () => {
       disconnectSocket()
     }
   }, [])
+  useEffect(() => {
+    socket.on("serverchange", (msg) => {
+      setUpdate(update+1)
+      console.log(update, msg)
+    })
+  }, [update])
 
   useEffect(() => {
     axios
