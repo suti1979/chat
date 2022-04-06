@@ -2,12 +2,7 @@ import Messages from "./Messages"
 import AddMessage from "./AddMessage"
 import { useState, useEffect } from "react"
 import axios from "axios"
-import {
-  initiateSocketConnection,
-  disconnectSocket,
-  socket,
-} from "../socketio.service"
-import { io } from "socket.io-client"
+import { initiateSocketConnection, socket } from "../socketio.service"
 
 export default function App() {
   const [messages, setMessages] = useState([])
@@ -17,13 +12,7 @@ export default function App() {
   useEffect(() => {
     initiateSocketConnection()
 
-    const cb = (msg) => {
-      axios
-      .get("/api")
-      .then((res) => setMessages(res.data))
-      .catch((err) => console.error(err))
-    }
-
+    const cb = (msg) => setUpdate(msg)
     socket.on("serverchange", cb)
     return () => {
       socket.off("serverchange", cb)
@@ -35,12 +24,12 @@ export default function App() {
       .get("/api")
       .then((res) => setMessages(res.data))
       .catch((err) => console.error(err))
-  }, [])
+  }, [update])
 
-  // useEffect(() => {
-  //   const user = window.prompt("Please enter your name", "Poppy")
-  //   setUserName(user)
-  // }, [])
+  useEffect(() => {
+    const user = window.prompt("Please enter your name", "Poppy")
+    setUserName(user)
+  }, [])
 
   return (
     <div className="App container">

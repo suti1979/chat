@@ -31,12 +31,12 @@ const io = require("socket.io")(http, {
 })
 
 io.on("connection", (socket) => {
-  console.log("a user connected")
+  console.log("user connected: ", socket.id)
   socket.on("disconnect", () => {
-    console.log("user disconnected")
+    console.log("user disconnected: ", socket.id)
   })
-  socket.on("sendMsg", (msg) => {
-    console.log("message: " + msg)
+  socket.on("serverchange", (msg) => {
+    console.log("message_id: " + msg)
     io.emit("serverchange", `server: ${msg}`)
   })
 })
