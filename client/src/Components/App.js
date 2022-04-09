@@ -16,8 +16,7 @@ export default function App() {
     socket.on("serverchange", msg => setUpdate(msg))
     
     return () => {
-      socket.disconnect()
-      //socket.close("serverchange", cb)
+      disconnectSocket()
     }
   }, [])
 

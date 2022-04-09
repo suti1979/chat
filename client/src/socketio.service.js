@@ -12,21 +12,14 @@ export const disconnectSocket = () => {
   if (socket) socket.disconnect()
 }
 
-// export const sendMsg = (msg) => {
-//   socket.emit("sendMsg", msg)
-// }
+export const sendMsg = (msg) => {
+  socket.emit("serverchange", msg)
+}
 
-// export const waitMsg = () => {
+export const waitMsg = () => {
  
-//   socket.on("serverchange", msg => {
-//     console.log("wai", msg)
-//     return msg
-//   })
-// }
+  socket.on("serverchange", msg => {
+    return msg
+  })
+}
 
-// export const waitMsg = (cb) => {
-//   socket.on("serverchange", (msg) => {
-//     console.log("wai", msg)
-//     return cb(null, msg)
-//   })
-// }

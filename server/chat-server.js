@@ -30,6 +30,7 @@ const io = require("socket.io")(http, {
   },
 })
 
+
 io.on("connection", (socket) => {
   console.log("user connected: ", socket.id)
   socket.on("disconnect", () => {
