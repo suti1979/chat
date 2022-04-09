@@ -2,7 +2,7 @@ import Messages from "./Messages"
 import AddMessage from "./AddMessage"
 import { useState, useEffect } from "react"
 import axios from "axios"
-import { initiateSocketConnection, socket } from "../socketio.service"
+import { initiateSocketConnection, socket, disconnectSocket } from "../socketio.service"
 
 export default function App() {
   const [messages, setMessages] = useState([])
@@ -12,10 +12,12 @@ export default function App() {
   useEffect(() => {
     initiateSocketConnection()
 
-    const cb = (msg) => setUpdate(msg)
-    socket.on("serverchange", cb)
+    //const cb = (msg) => setUpdate(msg)
+    socket.on("serverchange", msg => setUpdate(msg))
+    
     return () => {
-      socket.off("serverchange", cb)
+      socket.disconnect()
+      //socket.close("serverchange", cb)
     }
   }, [])
 

@@ -17,12 +17,13 @@ export default function AddMessage(props) {
   function handleMessageAdd(e, newMessage) {
     e.preventDefault()
     if (newMessage.message !== undefined && newMessage.message !== "") {
-      axios.post("/api", newMessage)
-        .then((dat)=> console.log("sent ", dat))
+      axios
+        .post("/api", newMessage)
+        //.then((dat)=> console.log("sent ", dat))
         .catch((err) => console.error(err))
 
       socket.emit("serverchange", uuidv4())
-     
+
       handleChange({ message: "" })
     }
   }
