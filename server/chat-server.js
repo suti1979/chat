@@ -24,9 +24,11 @@ app.use(express.urlencoded({ extended: false }))
 app.use(methodOverride("_method"))
 app.use(express.json())
 
+app.use(`${API_URL}/`, chatRouter)
+
 const io = require("socket.io")(http, {
   cors: {
-    origins: ["http://localhost:3001", "http://localhost:4001", "http://localhost:8080"],
+    origins: ["http://localhost:3000", "http://localhost:4001", "http://localhost:8080"],
   },
 })
 
@@ -43,6 +45,6 @@ io.on("connection", (socket) => {
   })
 })
 
-app.use(`${API_URL}/`, chatRouter)
+
 
 http.listen(PORT, HOST, () => console.log(`Server started @ http://${HOST}:${PORT}`))

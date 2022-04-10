@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
-import { sendMsg } from "../socketio.service"
+
 import { v4 as uuidv4 } from "uuid"
 
 export default function AddMessage(props) {
+  
   const [newMessage, setNewMessage] = useState([])
 
   useEffect(() => {
@@ -22,7 +23,7 @@ export default function AddMessage(props) {
         //.then((dat)=> console.log("sent ", dat))
         .catch((err) => console.error(err))
 
-      sendMsg(uuidv4())
+      props.sockett.emit("serverchange", uuidv4())
 
       handleChange({ message: "" })
     }

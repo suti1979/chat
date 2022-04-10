@@ -2,21 +2,25 @@ import Messages from "./Messages"
 import AddMessage from "./AddMessage"
 import { useState, useEffect } from "react"
 import axios from "axios"
-import { initiateSocketConnection, socket, disconnectSocket } from "../socketio.service"
+//import { initiateSocketConnection } from "../socketio.service"
+import { io } from "socket.io-client"
+
 
 export default function App() {
   const [messages, setMessages] = useState([])
   const [userName, setUserName] = useState("x")
   const [update, setUpdate] = useState(null)
+  const [sockett, setSockett] = useState()
 
   useEffect(() => {
-    initiateSocketConnection()
-
-    //const cb = (msg) => setUpdate(msg)
-    socket.on("serverchange", msg => setUpdate(msg))
+    const socket = io(process.env.REACT_APP_SOCKET_ENDPOINT)
     
+    setSockett(socket)
+    //const cb = (msg) => setUpdate(msg)
+    socket.on("serverchange", (msg) => setUpdate(msg))
+
     return () => {
-      disconnectSocket()
+      socket.disconnect()
     }
   }, [])
 
@@ -27,15 +31,15 @@ export default function App() {
       .catch((err) => console.error(err))
   }, [update])
 
-  useEffect(() => {
-    const user = window.prompt("Please enter your name", "Poppy")
-    setUserName(user)
-  }, [])
+  // useEffect(() => {
+  //   const user = window.prompt("Please enter your name", "Poppy")
+  //   setUserName(user)
+  // }, [])
 
   return (
     <div className="App container">
       <Messages messages={messages} />
-      <AddMessage userName={userName} />
+      <AddMessage userName={userName} sockett={sockett} />
     </div>
   )
 }
