@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
   Chat(req.body).save((err, data) => {
     if (err) throw err
-    res.json(data)
+    res.send(200)
   })
 })
 
