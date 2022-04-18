@@ -5,21 +5,21 @@
 $body-bg: $indigo-800;
 $body-color: $indigo-100;
 $theme-colors: (
-  "primary" : $indigo-600,
+  "primary": $indigo-600,
 );
 
 // custom variables
 $footer-height: 60px;
 
-
 // overall appearance
 main {
-  height: calc(100vh - $footer-height); 
+  height: calc(100vh - $footer-height);
   overflow-y: auto;
 }
 
-#message-textarea {
-  resize: none;
+.addMessage {
+  position: fixed;
+  bottom: $footer-height;
 }
 
 span.input-group-text {
@@ -32,7 +32,7 @@ span.input-group-text {
 }
 
 ::-webkit-scrollbar {
-    width: 0px;
+  width: 0px;
 }
 
 @import "~bootstrap/scss/bootstrap.scss";

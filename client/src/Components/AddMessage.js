@@ -27,18 +27,20 @@ export default function AddMessage(props) {
   }
 
   return (
-    <form className="m-2" onSubmit={(e) => handleMessageAdd(e, newMessage)}>
-      <div className="input-group">
-        <span className="input-group-text">{newMessage.userName}</span>
-        <input
-          type="text"
-          value={newMessage.message || ""}
-          onChange={(e) => handleChange({ message: e.target.value })}
-          name="textmessage"
-          className="form-control"
-          id="message-textarea"
-        />
-      </div>
-    </form>
+    <div className="addmessage">
+      <form className="m-2" onSubmit={(e) => handleMessageAdd(e, newMessage)}>
+        <div className="input-group">
+          <span className="input-group-text">{newMessage.userName}</span>
+          <input
+            type="text"
+            value={newMessage.message || ""}
+            onChange={(e) => handleChange({ message: e.target.value })}
+            name="textmessage"
+            className="form-control"
+            id="message-textarea"
+          />
+        </div>
+      </form>
+    </div>
   )
 }
