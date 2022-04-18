@@ -14,7 +14,6 @@ const DB_PSW = process.env.DB_PSW
 
 const mongoose = require("mongoose")
 const URI = `mongodb+srv://${DB_USER}:${DB_PSW}@cluster0.vpjd4.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`
-
 mongoose.connect(URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -23,15 +22,13 @@ mongoose.connect(URI, {
 app.use(express.urlencoded({ extended: false }))
 app.use(methodOverride("_method"))
 app.use(express.json())
-
 app.use(`${API_URL}/`, chatRouter)
 
 const io = require("socket.io")(http, {
   cors: {
-    origins: ["http://localhost:3000", "http://localhost:4001", "http://localhost:8080"],
+    origins: ["http://localhost:3000"],
   },
 })
-
 
 io.on("connection", (socket) => {
   console.log("user connected: ", socket.id)
@@ -44,7 +41,5 @@ io.on("connection", (socket) => {
     io.emit("serverchange", `server: ${msg}`)
   })
 })
-
-
 
 http.listen(PORT, HOST, () => console.log(`Server started @ http://${HOST}:${PORT}`))
